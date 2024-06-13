@@ -67,14 +67,14 @@ Dynamic Host Configuration Protocol is a client-server protocol. In this network
 
 #SPU: <br />
 In this architecture, I have actively used two routers to work the load balancer for both routers. These two routers configured a virtual gateway, which helps to send data if one of them is not working or shut down. Configuration of those routers- <br />
-R1: G0/0 21.0.1.1/28, G0/1 17.0.1.12/26 <br />
-R2: G0/0 21.0.1.5/28, G0/1 17.0.1.11/26 <br />
-For both routers, the default router is 21.0.1.10 <br />
+- R1: G0/0 21.0.1.1/28, G0/1 17.0.1.12/26 <br />
+- R2: G0/0 21.0.1.5/28, G0/1 17.0.1.11/26 <br />
+- For both routers, the default router is 21.0.1.10 <br />
 
 Those routers apply the HSRP (Hot standby routing protocol) protocol system to create the virtual default router, which works perfectly. When an active router works with another router, the state is inactive or on standby. If the active router gets any problem, then the standby router works automatically without any notification. <br />
 
 #Link Aggregation: <br />
-Link aggregation is established between the main switch 1 and main switch 2, and I also apply the channel port 1 for those links. In those center switches of the network faced more traffic if we use a single link between them it will be risky. In disturbance of the link 1 then other link can be active. So it is very important to activate the network for any odds condition between these switches. <br />
+Link aggregation is established between the main switch 1 and main switch 2, and I also apply the channel port 1 for those links. In those center switches of the network faced more traffic if we use a single link between them it will be risky. In disturbance of the link 1 then other link can be active. So activating the network for any odds condition between these switches is very important. <br />
 
 #Cross connection:<br />
 The management department is connected to all departments (Engineering, sales, SPU, and printer). The engineering section also connects to the SPU file server printer and customer support section. SPU, management, engineering, and salespeople are connected to the internet. All sections can access the printer. <br />
