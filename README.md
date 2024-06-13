@@ -18,17 +18,19 @@ Two people work in an office, and four people are technical writers working on d
 1. For salespeople, I take IP 12.0.1.0 and netmask 255.255.255.192.
 2. We can use 62 valid IP addresses.
 3. I took the customer support team to another router with network 20.0.1.0 255.255.255.248 because it's only four computers.
-4. I also take the VPN in different router for remote access.<br />
+4. I also take the VPN in different routers for remote access.<br />
 
 #Management department:<br />
-In this section, I take one router, and the network of this section is 11.0.1.0 255.255.255.240. In this IP, we can use valid 14 addresses, so if in the future in the management section need to increase the number of computers, we can add. They can access all the section in the network connected to the cloud also. They can access a dedicated server if they are in out-sourced by VPN.<br />
+In this section, I take one router, and the network of this section is 11.0.1.0 255.255.255.240. In this IP, we can use valid 14 addresses, so if in the future in the management section need to increase the number of computers, we can add. They can access all the sections in the network connected to the cloud also. They can access a dedicated server if they are in out-sourced by VPN.<br />
 
 #Bandwidth Calculations:<br />
 For each group’s bandwidth calculation in this table- <br />
 ![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/89a74c7d-81cb-467c-8e68-955148545992)
-![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/3d7ef715-0be3-4220-972e-4b7088c2bd1e)
+![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/3d7ef715-0be3-4220-972e-4b7088c2bd1e) <br />
+
 Here is the total bandwidth Load In and Load Out <br />
-![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/213649b1-5cd4-41e5-85fa-12146d979c9e)
+![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/213649b1-5cd4-41e5-85fa-12146d979c9e) <br />
+
 > All service groups require bandwidth under 100Mbps; the load-in and load-out bandwidth total is 51.84Mbps and 110.80Mbps. So, we can connect them by CAT5 Copper Straight-Through cable because this can transfer data per second 100Mbps. <br />
 
 #Growth: <br />
