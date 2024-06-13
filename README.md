@@ -31,7 +31,7 @@ For each group’s bandwidth calculation in this table- <br />
 Here is the total bandwidth Load In and Load Out <br />
 ![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/213649b1-5cd4-41e5-85fa-12146d979c9e) <br />
 
-> All service groups require bandwidth under 100Mbps; the load-in and load-out bandwidth total is 51.84Mbps and 110.80Mbps. So, we can connect them by CAT5 Copper Straight-Through cable because this can transfer data per second 100Mbps. <br />
+All service groups require bandwidth under 100Mbps; the load-in and load-out bandwidth total is 51.84Mbps and 110.80Mbps. So, we can connect them by CAT5 Copper Straight-Through cable because this can transfer data per second 100Mbps. <br />
 
 #Growth: <br />
 ![image](https://github.com/mdhn18/Network-Architecture-Implementation/assets/55639146/ca84a287-a33b-4173-ae8e-e5ce20c8e01b)
@@ -58,4 +58,39 @@ So, after 6 months, total bandwidth required = Load In + Load Out <br />
                   = 479.27Mbps <br />
                   =480Mbps(round) <br />
 
+So overall, all we can take is a 500Mbps net connection. This bandwidth covers every service group, but the J group needs link aggregation because in this group, load out and load in together 244.11Mbps. Normal CAT5 Copper Straight-Through cable can transfer only 100Mbps. <br />
 
+After 24 months we need to change subnet of engineering section because we need merge into the existing group we need required more usable IP address. In that case, we can replace /23 with/22 so we get 1022 usable IP addresses. <br />
+
+#DHCP:<br />
+Dynamic Host Configuration Protocol is a client-server protocol. In this network, every router is in DHCP mode. It will be helpful to add a new computer to this network no need to configure it by static. In a big network, if we configure it manually, it will be difficult to remember other IP addresses. In DHCP mode, we get the host IP by request of DHCP, and the host gets the IP address automatically. <br />
+
+#SPU: <br />
+In this architecture, I have actively used two routers to work the load balancer for both routers. These two routers configured a virtual gateway, which helps to send data if one of them is not working or shut down. Configuration of those routers- <br />
+R1: G0/0 21.0.1.1/28, G0/1 17.0.1.12/26 <br />
+R2: G0/0 21.0.1.5/28, G0/1 17.0.1.11/26 <br />
+For both routers, the default router is 21.0.1.10 <br />
+
+Those routers apply the HSRP (Hot standby routing protocol) protocol system to create the virtual default router, which works perfectly. When an active router works with another router, the state is inactive or on standby. If the active router gets any problem, then the standby router works automatically without any notification. <br />
+
+#Link Aggregation: <br />
+Link aggregation is established between the main switch 1 and main switch 2, and I also apply the channel port 1 for those links. In those center switches of the network faced more traffic if we use a single link between them it will be risky. In disturbance of the link 1 then other link can be active. So it is very important to activate the network for any odds condition between these switches. <br />
+
+#Cross connection:<br />
+The management department is connected to all departments (Engineering, sales, SPU, and printer). The engineering section also connects to the SPU file server printer and customer support section. SPU, management, engineering, and salespeople are connected to the internet. All sections can access the printer. <br />
+
+#Monitoring: <br />
+I have used another server with a different router and turned on SYSLOG mode to monitor notifications for any router and switches. I installed the code “logging (IP address of SYSLOG server)” in every server and switched and saved them. My code is “logging 22.0.1.1”. If I disconnect any router, switch, or shut down any port, the text will go to the SYSLOG server. <br />
+
+- My session for monitoring for the SME PRTG monitoring tools will cover the filter's IP address, protocols, total traffic, port sniffer, file transfer traffic remote control, etc.
+- After 24 months, if the engineering section has grown by 25-50 people and 5-6 sales staff, there are no issues with the connection because the network's capacity is two times capable.
+  
+#VPN and tunneling: <br />
+I have done the tunneling for remote cell with the main route which is connected to the internet I have used the virtual IP address is 100.0.0.1 for main router and IP address 100.0.0.2 for remote cell section. There are no effects on the other routers and switches for VPN tunneling. If we configure the routers, it is going to be faster. VPN tunneling between the VPN server and the dedicated server is done. <br />
+
+In this network, two VPN tunneling are done <br />
+- One Out-site router link to a dedicated server. <br />
+- Second VPN server to Out site router link <br />
+
+#Printer:
+Management, engineering, and sales groups are connected to the printer router.
